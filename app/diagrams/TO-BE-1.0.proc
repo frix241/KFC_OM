@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:connectorconfiguration="http://www.bonitasoft.org/model/connector/configuration" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
   <process:MainProcess xmi:id="_kNhmMH_nEfGnAoMFd5TsSQ" name="TO-BE" bonitaModelVersion="9">
     <elements xmi:type="process:Pool" xmi:id="_kNhmMX_nEfGnAoMFd5TsSQ" name="Gestión de pedidos KFC Perú" version="2.0">
       <elements xmi:type="process:Lane" xmi:id="_kNhmMn_nEfGnAoMFd5TsSQ" name="Cliente" actor="_7rxAMIAREfGnScNqXgq4cw">
@@ -194,8 +194,10 @@
             <leftOperand xmi:type="expression:Expression" xmi:id="_0tGj8YAcEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
               <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_1GEdkIAcEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
             </leftOperand>
-            <rightOperand xmi:type="expression:Expression" xmi:id="_0tGj8oAcEfGnScNqXgq4cw" content=""/>
-            <operator xmi:type="expression:Operator" xmi:id="_0tGj84AcEfGnScNqXgq4cw" type="ASSIGNMENT"/>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_0tGj8oAcEfGnScNqXgq4cw" name="newScript()" content="return &quot;Pago Rechazado&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_0tGj84AcEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
           </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_8ZNC4n_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_8ZNC43_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -216,7 +218,7 @@
           <expectedDuration xmi:type="expression:Expression" xmi:id="_8ZNp8n_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Long" returnTypeFixed="true"/>
         </elements>
       </elements>
-      <elements xmi:type="process:Lane" xmi:id="_nqhRgH_nEfGnAoMFd5TsSQ" name="Cocina (KDS)">
+      <elements xmi:type="process:Lane" xmi:id="_nqhRgH_nEfGnAoMFd5TsSQ" name="Cocina (KDS)" actor="_cuohYIBYEfGl4ZwCTNLVRg">
         <elements xmi:type="process:ServiceTask" xmi:id="_BZOnMH_vEfGiQsbHoCt4_w" name="Transmitir orden al Kitchen Display System" outgoing="_yeGkUH_xEfGiQsbHoCt4_w" incoming="_vqWDQH_xEfGiQsbHoCt4_w">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_AWcUgX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_AWcUgH_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
@@ -243,6 +245,82 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_ggahon_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_ggahoX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_ggaho3_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <connectors xmi:type="process:Connector" xmi:id="_DyQcAIBbEfGl4ZwCTNLVRg" name="Email" definitionId="email" event="ON_ENTER" definitionVersion="1.3.0">
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_DyQcAYBbEfGl4ZwCTNLVRg" definitionId="email" version="1.3.0" modelVersion="9">
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcAoBbEfGl4ZwCTNLVRg" key="smtpHost">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcA4BbEfGl4ZwCTNLVRg" name="smtp.gmail.com" content="smtp.gmail.com" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcBIBbEfGl4ZwCTNLVRg" key="smtpPort">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcBYBbEfGl4ZwCTNLVRg" name="465" content="465" returnType="java.lang.Integer" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcBoBbEfGl4ZwCTNLVRg" key="sslSupport">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcB4BbEfGl4ZwCTNLVRg" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcCIBbEfGl4ZwCTNLVRg" key="starttlsSupport">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcCYBbEfGl4ZwCTNLVRg" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcCoBbEfGl4ZwCTNLVRg" key="trustCertificate">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcC4BbEfGl4ZwCTNLVRg" name="false" content="false" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcDIBbEfGl4ZwCTNLVRg" key="authType">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcDYBbEfGl4ZwCTNLVRg" name="Basic authentication" content="Basic authentication" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcDoBbEfGl4ZwCTNLVRg" key="userName">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcD4BbEfGl4ZwCTNLVRg" name="renzogeomarm@gmail.com" content="renzogeomarm@gmail.com" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcEIBbEfGl4ZwCTNLVRg" key="password">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcEYBbEfGl4ZwCTNLVRg" name="bfqm hclt ntyz dnvn" content="bfqm hclt ntyz dnvn" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcEoBbEfGl4ZwCTNLVRg" key="oauth2AccessToken">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcE4BbEfGl4ZwCTNLVRg" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcFIBbEfGl4ZwCTNLVRg" key="from">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcFYBbEfGl4ZwCTNLVRg" name="renzogeomarm@gmail.co," content="renzogeomarm@gmail.co," returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcFoBbEfGl4ZwCTNLVRg" key="returnPath">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcF4BbEfGl4ZwCTNLVRg" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcGIBbEfGl4ZwCTNLVRg" key="to">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcGYBbEfGl4ZwCTNLVRg" name="cyanahu@unsa.edu.pe" content="cyanahu@unsa.edu.pe" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcGoBbEfGl4ZwCTNLVRg" key="bcc">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcG4BbEfGl4ZwCTNLVRg" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcHIBbEfGl4ZwCTNLVRg" key="cc">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcHYBbEfGl4ZwCTNLVRg" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcHoBbEfGl4ZwCTNLVRg" key="subject">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcH4BbEfGl4ZwCTNLVRg" name="¡Evalúa tu reciente pedido en KFC!" content="¡Evalúa tu reciente pedido en KFC!" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcIIBbEfGl4ZwCTNLVRg" key="html">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcIYBbEfGl4ZwCTNLVRg" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcIoBbEfGl4ZwCTNLVRg" key="message">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcI4BbEfGl4ZwCTNLVRg" name="&lt;pattern-expression>" content="&lt;p>Tu pedido ha sido entregado exitosamente. En KFC nos esforzamos por brindarte siempre el mejor servicio y los productos m&amp;aacute;s frescos.&lt;/p>&#xA;&#xA;&lt;p>&amp;iquest;Nos ayudar&amp;iacute;as evaluando tu experiencia de hoy? Por favor, t&amp;oacute;mate un minuto para responder nuestra breve encuesta de satisfacci&amp;oacute;n: &lt;strong>[formulario]&lt;/strong>&lt;/p>&#xA;&#xA;&lt;p>&amp;iexcl;Gracias por tu preferencia!&lt;/p>&#xA;" type="TYPE_PATTERN" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcJIBbEfGl4ZwCTNLVRg" key="headers">
+                <expression xmi:type="expression:TableExpression" xmi:id="_DyQcJYBbEfGl4ZwCTNLVRg"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcJoBbEfGl4ZwCTNLVRg" key="charset">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcJ4BbEfGl4ZwCTNLVRg" name="UTF-8" content="UTF-8" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcKIBbEfGl4ZwCTNLVRg" key="replyTo">
+                <expression xmi:type="expression:Expression" xmi:id="_DyQcKYBbEfGl4ZwCTNLVRg" content="" returnTypeFixed="true"/>
+              </parameters>
+              <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_DyQcKoBbEfGl4ZwCTNLVRg" key="attachments">
+                <expression xmi:type="expression:ListExpression" xmi:id="_DyQcK4BbEfGl4ZwCTNLVRg"/>
+              </parameters>
+            </configuration>
+          </connectors>
+          <operations xmi:type="expression:Operation" xmi:id="_UIjuUIBWEfGl4ZwCTNLVRg">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_UIjuUYBWEfGl4ZwCTNLVRg" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_Ucq9IIBWEfGl4ZwCTNLVRg" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_UIjuUoBWEfGl4ZwCTNLVRg" name="newScript()" content="return &quot;Encuesta Enviada&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_UIjuU4BWEfGl4ZwCTNLVRg" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_ggahpH_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_ggahpX_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_ggahpn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -297,6 +375,15 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_iLOdoX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_iLOdoH_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_iLOdon_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_h6U1EIBWEfGl4ZwCTNLVRg">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_h6U1EYBWEfGl4ZwCTNLVRg" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_iOVWMIBWEfGl4ZwCTNLVRg" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_h6U1EoBWEfGl4ZwCTNLVRg" name="newScript()" content="return &quot;Completado y Registrado en BI&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_h6U1E4BWEfGl4ZwCTNLVRg" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_iLOdo3_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_iLOdpH_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_iLOdpX_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -319,6 +406,15 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_KtF_QX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_KtF_QH_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_KtF_Qn_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_9l7O4IBVEfGl4ZwCTNLVRg">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_9l7O4YBVEfGl4ZwCTNLVRg" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_9_RjAIBVEfGl4ZwCTNLVRg" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_9l7O4oBVEfGl4ZwCTNLVRg" name="newScript()" content="return &quot;Verificado&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_9l7O44BVEfGl4ZwCTNLVRg" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_KtF_Q3_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_KtF_RH_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_KtF_RX_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -341,6 +437,15 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_HwiHgX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_HwiHgH_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_HwiHgn_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_uvp-MIBVEfGl4ZwCTNLVRg">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_uvp-MYBVEfGl4ZwCTNLVRg" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_vN1H8IBVEfGl4ZwCTNLVRg" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_uvp-MoBVEfGl4ZwCTNLVRg" name="newScript()" content="return &quot;Empaquetado&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_uvp-M4BVEfGl4ZwCTNLVRg" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_HwiHg3_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_HwiHhH_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_HwiHhX_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -363,6 +468,15 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_Qne6EX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_Qne6EH_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_Qne6En_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_KjYj0IBWEfGl4ZwCTNLVRg">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_KjYj0YBWEfGl4ZwCTNLVRg" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_LHxDQIBWEfGl4ZwCTNLVRg" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_KjYj0oBWEfGl4ZwCTNLVRg" name="newScript()" content="return &quot;Corregido&quot;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT"/>
+            <operator xmi:type="expression:Operator" xmi:id="_KjYj04BWEfGl4ZwCTNLVRg" type="JAVA_METHOD" expression="setEstado">
+              <inputTypes>java.lang.String</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_Qne6E3_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_Qne6FH_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_Qne6FX_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -520,6 +634,8 @@
       <actors xmi:type="process:Actor" xmi:id="_7rxAMIAREfGnScNqXgq4cw" documentation="Usuario que inicia la solicitud del pedido de KFC a través de la app, web, mostrador o agregadores." name="Cliente" initiator="true"/>
       <actors xmi:type="process:Actor" xmi:id="__7H8kIAREfGnScNqXgq4cw" documentation="Colaborador de tienda encargado de registrar la orden en el sistema y gestionar la confirmación del pago." name="Cajero"/>
       <actors xmi:type="process:Actor" xmi:id="_E72rgIASEfGnScNqXgq4cw" documentation="Colaborador responsable de armar el pedido, realizar el checklist de verificación y entregar al cliente o motorizado." name="Personal de Empaque"/>
+      <actors xmi:type="process:Actor" xmi:id="_ZIFRcIBYEfGl4ZwCTNLVRg" documentation="ActorCliente" name="ActorCliente"/>
+      <actors xmi:type="process:Actor" xmi:id="_cuohYIBYEfGl4ZwCTNLVRg" documentation="ActorCocina" name="ActorCocina"/>
       <contract xmi:type="process:Contract" xmi:id="_kNhmTH_nEfGnAoMFd5TsSQ"/>
       <searchIndexes xmi:type="process:SearchIndex" xmi:id="_kNhmTX_nEfGnAoMFd5TsSQ">
         <name xmi:type="expression:Expression" xmi:id="_kNhmTn_nEfGnAoMFd5TsSQ" content="" returnTypeFixed="true"/>
