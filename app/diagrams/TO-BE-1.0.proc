@@ -2,23 +2,58 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
   <process:MainProcess xmi:id="_kNhmMH_nEfGnAoMFd5TsSQ" name="TO-BE" bonitaModelVersion="9">
     <elements xmi:type="process:Pool" xmi:id="_kNhmMX_nEfGnAoMFd5TsSQ" name="Gestión de pedidos KFC Perú" version="2.0">
-      <elements xmi:type="process:Lane" xmi:id="_kNhmMn_nEfGnAoMFd5TsSQ" name="Cliente" actor="_kNhmS3_nEfGnAoMFd5TsSQ">
+      <elements xmi:type="process:Lane" xmi:id="_kNhmMn_nEfGnAoMFd5TsSQ" name="Cliente" actor="_7rxAMIAREfGnScNqXgq4cw">
         <elements xmi:type="process:StartEvent" xmi:id="_kNhmM3_nEfGnAoMFd5TsSQ" name="Cliente desea pedir" outgoing="_kNhmSH_nEfGnAoMFd5TsSQ">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_kNhmNH_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_kNhmNX_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_kNhmNn_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
         </elements>
-        <elements xmi:type="process:Task" xmi:id="_kNhmN3_nEfGnAoMFd5TsSQ" name="Elegir canal (App/Web/WhatsApp con chatbot/Mostrador/Autorapido/Agregador)" outgoing="_1u41EH_wEfGiQsbHoCt4_w" incoming="_kNhmSH_nEfGnAoMFd5TsSQ" overrideActorsOfTheLane="false">
+        <elements xmi:type="process:Task" xmi:id="_kNhmN3_nEfGnAoMFd5TsSQ" name="Elegir canal (App/Web/WhatsApp con chatbot/Mostrador/Autorapido/Agregador)" outgoing="_1u41EH_wEfGiQsbHoCt4_w _2h-8kIAJEfGnScNqXgq4cw" incoming="_kNhmSH_nEfGnAoMFd5TsSQ _2h-8kIAJEfGnScNqXgq4cw" overrideActorsOfTheLane="false">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_kNhmOH_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_kNhmOX_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_kNhmOn_nEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_EpZXoIAUEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_EpZXoYAUEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_CnWDgIAYEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_EpZXooAUEfGnScNqXgq4cw" name="newScript()" content="def nuevoCanal = new com.kfc.pedidos.Canal()&#xD;&#xA;&#xD;&#xA;nuevoCanal.tipo = canal_tipo&#xD;&#xA;nuevoCanal.nombre = canal_nombre&#xD;&#xA;&#xD;&#xA;return nuevoCanal" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="com.kfc.pedidos.Canal">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_h3NY0IAYEfGnScNqXgq4cw" name="canal_tipo">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_h3NY0YAYEfGnScNqXgq4cw"/>
+              </referencedElements>
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_h3NY0oAYEfGnScNqXgq4cw" name="canal_nombre">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_h3NY04AYEfGnScNqXgq4cw"/>
+              </referencedElements>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_EpZXo4AUEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setCanal">
+              <inputTypes>com.kfc.pedidos.Canal</inputTypes>
+            </operator>
+          </operations>
+          <operations xmi:type="expression:Operation" xmi:id="_kaMS8IAYEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_kaMS8YAYEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_k_uo8IAYEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_kaMS8oAYEfGnScNqXgq4cw" name="newScript()" content="def nuevoCliente = new com.kfc.pedidos.Cliente()&#xD;&#xA;&#xD;&#xA;nuevoCliente.nombre = cliente_nombre&#xD;&#xA;nuevoCliente.telefono = cliente_telefono&#xD;&#xA;nuevoCliente.email = cliente_email&#xD;&#xA;&#xD;&#xA;return nuevoCliente&#xD;&#xA;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="com.kfc.pedidos.Cliente">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_rWn5kIAYEfGnScNqXgq4cw" name="cliente_nombre">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_rWn5kYAYEfGnScNqXgq4cw"/>
+              </referencedElements>
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_rWn5koAYEfGnScNqXgq4cw" name="cliente_telefono">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_rWn5k4AYEfGnScNqXgq4cw"/>
+              </referencedElements>
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_rWn5lIAYEfGnScNqXgq4cw" name="cliente_email">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_rWn5lYAYEfGnScNqXgq4cw"/>
+              </referencedElements>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_kaMS84AYEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setCliente">
+              <inputTypes>com.kfc.pedidos.Cliente</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_kNhmO3_nEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_kNhmPH_nEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_kNhmPX_nEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_kNhmPn_nEfGnAoMFd5TsSQ" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_kNhmP3_nEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_kNhmQH_nEfGnAoMFd5TsSQ" url="http://localhost:8080/bonita/portal/resource/app/adminAppBonita/admin-resource-list/API/pageDownload?id=107">
-            <targetForm xmi:type="expression:Expression" xmi:id="_4NeHoIABEfGxO6RDy0coag" name="newForm" content="d025a5d4-5ecd-4155-853a-82962202f064" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_AVT30IAKEfGnScNqXgq4cw" name="FormularioElegirCanal" content="c24d419d-8a02-41e6-81f9-5d7e2f1d4652" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_kNhmQn_nEfGnAoMFd5TsSQ">
             <inputs xmi:type="process:ContractInput" xmi:id="_KSS0cIABEfGxO6RDy0coag" name="canal_tipo">
@@ -40,7 +75,7 @@
           <expectedDuration xmi:type="expression:Expression" xmi:id="_kNhmQ3_nEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Long" returnTypeFixed="true"/>
         </elements>
       </elements>
-      <elements xmi:type="process:Lane" xmi:id="_nbbFkH_nEfGnAoMFd5TsSQ" name="Caja / Canal digital">
+      <elements xmi:type="process:Lane" xmi:id="_nbbFkH_nEfGnAoMFd5TsSQ" name="Caja / Canal digital" actor="__7H8kIAREfGnScNqXgq4cw">
         <elements xmi:type="process:ServiceTask" xmi:id="_nNtu0H_pEfGnAoMFd5TsSQ" name="Procesar pago (pasarela)" outgoing="_9QUmMH_wEfGiQsbHoCt4_w" incoming="_8AAN0H_wEfGiQsbHoCt4_w">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_nNtu0n_pEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_nNtu0X_pEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
@@ -60,13 +95,66 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_ltSd4X_pEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_ltSd4H_pEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_ltSd4n_pEfGnAoMFd5TsSQ" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_v0o9AIAYEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_v0o9AYAYEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_1BD-kIAYEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_v0o9AoAYEfGnScNqXgq4cw" name="newScript()" content="def nuevaTienda = new com.kfc.pedidos.Tienda()&#xD;&#xA;nuevaTienda.nombre = tienda_nombre&#xD;&#xA;return nuevaTienda" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="com.kfc.pedidos.Tienda">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_anX4kIAZEfGnScNqXgq4cw" name="tienda_nombre">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_anX4kYAZEfGnScNqXgq4cw"/>
+              </referencedElements>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_v0o9A4AYEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setTienda">
+              <inputTypes>com.kfc.pedidos.Tienda</inputTypes>
+            </operator>
+          </operations>
+          <operations xmi:type="expression:Operation" xmi:id="_c8vNcIAZEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_c8vNcYAZEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_dZD9EIAZEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_c8vNcoAZEfGnScNqXgq4cw" name="newScript()" content="def clienteActual = pedido.cliente&#xD;&#xA;&#xD;&#xA;if (clienteActual != null) {&#xD;&#xA;    clienteActual.direccion = cliente_direccion&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return clienteActual" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="com.kfc.pedidos.Cliente">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_iDXwEIAZEfGnScNqXgq4cw" name="cliente_direccion">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_iDXwEYAZEfGnScNqXgq4cw"/>
+              </referencedElements>
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_iDXwEoAZEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_c8vNc4AZEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setCliente">
+              <inputTypes>com.kfc.pedidos.Cliente</inputTypes>
+            </operator>
+          </operations>
+          <operations xmi:type="expression:Operation" xmi:id="_jcAW8IAZEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_jcAW8YAZEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_lXU0IIAZEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_jcAW8oAZEfGnScNqXgq4cw" name="newScript()" content="double total = 0.0&#xD;&#xA;&#xD;&#xA;// Verificamos que la tabla de productos no esté vacía&#xD;&#xA;if (productos != null) {&#xD;&#xA;    for (def item : productos) {&#xD;&#xA;        // Multiplica cantidad x precio de cada fila y lo acumula&#xD;&#xA;        total += (item.cantidad * item.precioUnitario)&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return total&#xD;&#xA;" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.Double">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_EaiNgIAaEfGnScNqXgq4cw" name="productos" type="COMPLEX" multiple="true">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_EaiNgYAaEfGnScNqXgq4cw"/>
+              </referencedElements>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_jcAW84AZEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setMontoTotal">
+              <inputTypes>java.lang.Double</inputTypes>
+            </operator>
+          </operations>
+          <operations xmi:type="expression:Operation" xmi:id="_ewh-8IAcEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_ewh-8YAcEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_fQLIUIAcEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_ewh-8oAcEfGnScNqXgq4cw" name="newScript()" content="def listaCajitas = []&#xD;&#xA;&#xD;&#xA;if (productos != null) {&#xD;&#xA;    for (def item : productos) {&#xD;&#xA;        // Creamos un molde de producto por cada fila de la tabla&#xD;&#xA;        def nuevoProducto = new com.kfc.pedidos.Producto()&#xD;&#xA;        &#xD;&#xA;        nuevoProducto.nombre = item.producto_nombre&#xD;&#xA;        nuevoProducto.cantidad = item.cantidad&#xD;&#xA;        nuevoProducto.precioUnitario = item.precioUnitario&#xD;&#xA;        &#xD;&#xA;        // Metemos el producto a la lista final&#xD;&#xA;        listaCajitas.add(nuevoProducto)&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;return listaCajitas" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="java.util.List">
+              <referencedElements xmi:type="process:ContractInput" xmi:id="_lkpXEIAcEfGnScNqXgq4cw" name="productos" type="COMPLEX" multiple="true">
+                <mapping xmi:type="process:ContractInputMapping" xmi:id="_lkpXEYAcEfGnScNqXgq4cw"/>
+              </referencedElements>
+            </rightOperand>
+            <operator xmi:type="expression:Operator" xmi:id="_ewh-84AcEfGnScNqXgq4cw" type="JAVA_METHOD" expression="setProductos">
+              <inputTypes>java.util.List</inputTypes>
+            </operator>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_ltSd43_pEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_ltSd5H_pEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_ltSd5X_pEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_ltSd53_pEfGnAoMFd5TsSQ" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_ltSd5n_pEfGnAoMFd5TsSQ" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_ltSd6X_pEfGnAoMFd5TsSQ">
-            <targetForm xmi:type="expression:Expression" xmi:id="_KoMEkIAEEfGxO6RDy0coag" name="newForm1" content="195f72e4-fb6a-4997-b1c5-bbba631b9fef" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_zBvBkIAMEfGnScNqXgq4cw" name="FormularioRegistrarPedido" content="81a45d03-604a-4282-a6ce-8f38c1348047" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_ltSd6H_pEfGnAoMFd5TsSQ">
             <inputs xmi:type="process:ContractInput" xmi:id="_tFGaIIADEfGxO6RDy0coag" name="tienda_nombre">
@@ -75,7 +163,7 @@
             <inputs xmi:type="process:ContractInput" xmi:id="_zt9kgIADEfGxO6RDy0coag" name="cliente_direccion">
               <mapping xmi:type="process:ContractInputMapping" xmi:id="_zt9kgYADEfGxO6RDy0coag"/>
             </inputs>
-            <inputs xmi:type="process:ContractInput" xmi:id="_1tt1wIADEfGxO6RDy0coag" name="productos" type="COMPLEX">
+            <inputs xmi:type="process:ContractInput" xmi:id="_1tt1wIADEfGxO6RDy0coag" name="productos" type="COMPLEX" multiple="true">
               <mapping xmi:type="process:ContractInputMapping" xmi:id="_1tt1wYADEfGxO6RDy0coag"/>
               <inputs xmi:type="process:ContractInput" xmi:id="_4D-igIADEfGxO6RDy0coag" name="producto_nombre">
                 <mapping xmi:type="process:ContractInputMapping" xmi:id="_4D-igYADEfGxO6RDy0coag"/>
@@ -102,13 +190,20 @@
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_8ZNC4H_uEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_8ZMb0H_uEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_8ZNC4X_uEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
+          <operations xmi:type="expression:Operation" xmi:id="_0tGj8IAcEfGnScNqXgq4cw">
+            <leftOperand xmi:type="expression:Expression" xmi:id="_0tGj8YAcEfGnScNqXgq4cw" name="pedido" content="pedido" type="TYPE_VARIABLE" returnType="com.kfc.pedidos.Pedido">
+              <referencedElements xmi:type="process:BusinessObjectData" xmi:id="_1GEdkIAcEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido"/>
+            </leftOperand>
+            <rightOperand xmi:type="expression:Expression" xmi:id="_0tGj8oAcEfGnScNqXgq4cw" content=""/>
+            <operator xmi:type="expression:Operator" xmi:id="_0tGj84AcEfGnScNqXgq4cw" type="ASSIGNMENT"/>
+          </operations>
           <loopCondition xmi:type="expression:Expression" xmi:id="_8ZNC4n_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_8ZNC43_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <cardinalityExpression xmi:type="expression:Expression" xmi:id="_8ZNC5H_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_8ZNC5n_uEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_8ZNC5X_uEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_8ZNp8H_uEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_UWBb0IAEEfGxO6RDy0coag" name="newForm2" content="25904b48-838a-4728-9128-5a5d102118f2" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_BgIvYIAOEfGnScNqXgq4cw" name="FormularioRechazo" content="27318a45-944d-480c-bbdc-44b94ebb046f" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_8ZNC53_uEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_Qi2FIIAEEfGxO6RDy0coag" name="motivoRechazo">
@@ -143,7 +238,7 @@
           <completionCondition xmi:type="expression:Expression" xmi:id="_FnLOVn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
         </elements>
       </elements>
-      <elements xmi:type="process:Lane" xmi:id="_n_e04H_nEfGnAoMFd5TsSQ" name="Empaque / Entrega">
+      <elements xmi:type="process:Lane" xmi:id="_n_e04H_nEfGnAoMFd5TsSQ" name="Empaque / Entrega" actor="_E72rgIASEfGnScNqXgq4cw">
         <elements xmi:type="process:Task" xmi:id="_ggahoH_vEfGiQsbHoCt4_w" name="Enviar encuesta de satisfaccion post-venta" outgoing="_GFK1EH_zEfGiQsbHoCt4_w" incoming="_PTj3QH_zEfGiQsbHoCt4_w" overrideActorsOfTheLane="false">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_ggahon_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_ggahoX_vEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
@@ -154,7 +249,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_ggbIsH_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_ggahp3_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_ggbIsn_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_pPnrcIAFEfGxO6RDy0coag" name="newForm6" content="ce5c4faa-5ba1-4c3b-b6e3-d6e1dd69c3de" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_N_IxQIAPEfGnScNqXgq4cw" name="FormularioEnviarEncuesta" content="a3eb9fce-d9cc-419d-8b7e-0ad17f1192be" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_ggbIsX_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_jFtt8IAFEfGxO6RDy0coag" name="calificacion" type="INTEGER">
@@ -186,7 +281,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_R3yEV3_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_R3yEVn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_R3yEWX_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_qbzxwIAFEfGxO6RDy0coag" name="newForm7" content="59fbf043-568a-4a86-b97b-f8ba02a3a939" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_GEM7AIAPEfGnScNqXgq4cw" name="FormularioEntregar" content="005d8899-1ac6-498c-9965-1ab8ae2c043e" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_R3yEWH_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_O9pzgIAFEfGxO6RDy0coag" name="horaEntrega" type="OFFSETDATETIME">
@@ -208,7 +303,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_iLOdp3_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_iLOdpn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_iLOdqX_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_yb500IAFEfGxO6RDy0coag" name="newForm8" content="7ab396a3-ed24-44b3-822b-53b91288653b" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_2OkpoIAPEfGnScNqXgq4cw" name="FormularioRegistrarKPIS" content="b8149f85-5b75-48e4-8ecc-58ff5ea4f0ff" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_iLOdqH_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_tdBgAIAFEfGxO6RDy0coag" name="indicador">
@@ -230,7 +325,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_KtF_R3_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_KtF_Rn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_KtF_SX_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_3zxt4IAEEfGxO6RDy0coag" name="newForm4" content="6b7f542e-2608-460a-95a6-712c99d78d55" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_jQkkAIAOEfGnScNqXgq4cw" name="FormularioVerificacionDigital" content="d527b5ee-19f1-43d9-9db9-9432ec60fc5a" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_KtF_SH_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_x4W4UIAEEfGxO6RDy0coag" name="completoCorrecto" type="BOOLEAN">
@@ -252,7 +347,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_HwiHh3_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_HwiHhn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_HwiHiX_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_uUcFoIAEEfGxO6RDy0coag" name="newForm3" content="b21387a8-7adf-4e4b-9e34-805d2fdf322d" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_PD8SoIAOEfGnScNqXgq4cw" name="FormularioEmpaquetarPedido" content="25a5a39d-d06e-46cf-84fb-144f586c55d0" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_HwiHiH_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_pJAikIAEEfGxO6RDy0coag" name="empaqueObservaciones">
@@ -274,7 +369,7 @@
           <iteratorExpression xmi:type="expression:Expression" xmi:id="_Qne6F3_vEfGiQsbHoCt4_w" name="multiInstanceIterator" content="multiInstanceIterator" type="MULTIINSTANCE_ITERATOR_TYPE" returnType="java.lang.Object" returnTypeFixed="true"/>
           <completionCondition xmi:type="expression:Expression" xmi:id="_Qne6Fn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <formMapping xmi:type="process:FormMapping" xmi:id="_QnfhIH_vEfGiQsbHoCt4_w">
-            <targetForm xmi:type="expression:Expression" xmi:id="_JK9cIIAFEfGxO6RDy0coag" name="newForm5" content="bde4defb-ec89-4376-aada-f5726b95fb6a" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+            <targetForm xmi:type="expression:Expression" xmi:id="_zVbuwIAOEfGnScNqXgq4cw" name="FormularioCorregirPedido" content="2aec859d-1d72-4fa5-85b1-b77cfeda95db" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
           </formMapping>
           <contract xmi:type="process:Contract" xmi:id="_Qne6GH_vEfGiQsbHoCt4_w">
             <inputs xmi:type="process:ContractInput" xmi:id="_ASTZYIAFEfGxO6RDy0coag" name="itemsACorregir">
@@ -304,7 +399,7 @@
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_HZtmIH_zEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_HZtmIn_zEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
         </elements>
-        <elements xmi:type="process:XORGateway" xmi:id="_K5oCkH_zEfGiQsbHoCt4_w" outgoing="_PTj3QH_zEfGiQsbHoCt4_w" incoming="_NcV28H_zEfGiQsbHoCt4_w _OWtNcH_zEfGiQsbHoCt4_w">
+        <elements xmi:type="process:XORGateway" xmi:id="_K5oCkH_zEfGiQsbHoCt4_w" name="Unir flujos de entrega" outgoing="_PTj3QH_zEfGiQsbHoCt4_w" incoming="_NcV28H_zEfGiQsbHoCt4_w _OWtNcH_zEfGiQsbHoCt4_w">
           <dynamicLabel xmi:type="expression:Expression" xmi:id="_K5oCkn_zEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_K5oCkX_zEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_K5oCk3_zEfGiQsbHoCt4_w" name="" content="" returnTypeFixed="true"/>
@@ -320,10 +415,13 @@
           <completionCondition xmi:type="expression:Expression" xmi:id="_e2Yoxn_vEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
         </elements>
       </elements>
+      <data xmi:type="process:BusinessObjectData" xmi:id="_rBvWEIAVEfGnScNqXgq4cw" name="pedido" dataType="_kNhmZH_nEfGnAoMFd5TsSQ" className="com.kfc.pedidos.Pedido">
+        <defaultValue xmi:type="expression:Expression" xmi:id="_rBvWEYAVEfGnScNqXgq4cw" name="" content="" interpreter="GROOVY" type="TYPE_READ_ONLY_SCRIPT" returnType="java.lang.Object"/>
+      </data>
       <formMapping xmi:type="process:FormMapping" xmi:id="_kNhmRH_nEfGnAoMFd5TsSQ">
-        <targetForm xmi:type="expression:Expression" xmi:id="_kNhmRX_nEfGnAoMFd5TsSQ" name="" content="" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
+        <targetForm xmi:type="expression:Expression" xmi:id="_kNhmRX_nEfGnAoMFd5TsSQ" name="FormularioElegirCanal" content="c24d419d-8a02-41e6-81f9-5d7e2f1d4652" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
       </formMapping>
-      <overviewFormMapping xmi:type="process:FormMapping" xmi:id="_kNhmRn_nEfGnAoMFd5TsSQ">
+      <overviewFormMapping xmi:type="process:FormMapping" xmi:id="_kNhmRn_nEfGnAoMFd5TsSQ" type="NONE">
         <targetForm xmi:type="expression:Expression" xmi:id="_kNhmR3_nEfGnAoMFd5TsSQ" name="" content="" type="FORM_REFERENCE_TYPE" returnTypeFixed="true"/>
       </overviewFormMapping>
       <connections xmi:type="process:SequenceFlow" xmi:id="_kNhmSH_nEfGnAoMFd5TsSQ" target="_kNhmN3_nEfGnAoMFd5TsSQ" source="_kNhmM3_nEfGnAoMFd5TsSQ">
@@ -342,7 +440,7 @@
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_9QVNQH_wEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="_9QVNQX_wEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
-      <connections xmi:type="process:SequenceFlow" xmi:id="__90uQH_wEfGiQsbHoCt4_w" name="No" target="_8ZL0wH_uEfGiQsbHoCt4_w" source="_3-H-sH_uEfGiQsbHoCt4_w">
+      <connections xmi:type="process:SequenceFlow" xmi:id="__90uQH_wEfGiQsbHoCt4_w" name="No" target="_8ZL0wH_uEfGiQsbHoCt4_w" source="_3-H-sH_uEfGiQsbHoCt4_w" isDefault="true">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="__90uQX_wEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="__90uQn_wEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
@@ -352,7 +450,7 @@
       </connections>
       <connections xmi:type="process:SequenceFlow" xmi:id="_vqWDQH_xEfGiQsbHoCt4_w" name="Si" target="_BZOnMH_vEfGiQsbHoCt4_w" source="_3-H-sH_uEfGiQsbHoCt4_w">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_vqWqUH_xEfGiQsbHoCt4_w"/>
-        <condition xmi:type="expression:Expression" xmi:id="_vqWqUX_xEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        <condition xmi:type="expression:Expression" xmi:id="_vqWqUX_xEfGiQsbHoCt4_w" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
       <connections xmi:type="process:SequenceFlow" xmi:id="_yeGkUH_xEfGiQsbHoCt4_w" target="_FnKnQH_vEfGiQsbHoCt4_w" source="_BZOnMH_vEfGiQsbHoCt4_w">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_yeGkUX_xEfGiQsbHoCt4_w"/>
@@ -372,9 +470,9 @@
       </connections>
       <connections xmi:type="process:SequenceFlow" xmi:id="_vn1sYH_yEfGiQsbHoCt4_w" name="Si" target="_Zah8sH_yEfGiQsbHoCt4_w" source="_RlD1QH_yEfGiQsbHoCt4_w">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_vn1sYX_yEfGiQsbHoCt4_w"/>
-        <condition xmi:type="expression:Expression" xmi:id="_vn1sYn_yEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        <condition xmi:type="expression:Expression" xmi:id="_vn1sYn_yEfGiQsbHoCt4_w" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
-      <connections xmi:type="process:SequenceFlow" xmi:id="_w6BF8H_yEfGiQsbHoCt4_w" name="No" target="_QneTAH_vEfGiQsbHoCt4_w" source="_RlD1QH_yEfGiQsbHoCt4_w">
+      <connections xmi:type="process:SequenceFlow" xmi:id="_w6BF8H_yEfGiQsbHoCt4_w" name="No" target="_QneTAH_vEfGiQsbHoCt4_w" source="_RlD1QH_yEfGiQsbHoCt4_w" isDefault="true">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_w6BF8X_yEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="_w6BF8n_yEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
@@ -382,13 +480,13 @@
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_0k41MX_yEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="_0k41Mn_yEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
-      <connections xmi:type="process:SequenceFlow" xmi:id="_-3rToH_yEfGiQsbHoCt4_w" name="Recojo en tienda" target="_R3xdQH_vEfGiQsbHoCt4_w" source="_Zah8sH_yEfGiQsbHoCt4_w">
+      <connections xmi:type="process:SequenceFlow" xmi:id="_-3rToH_yEfGiQsbHoCt4_w" name="Recojo en tienda" target="_R3xdQH_vEfGiQsbHoCt4_w" source="_Zah8sH_yEfGiQsbHoCt4_w" isDefault="true">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_-3r6sH_yEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="_-3r6sX_yEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
       <connections xmi:type="process:SequenceFlow" xmi:id="_BI2FAH_zEfGiQsbHoCt4_w" name="Delivery" target="_dFvKgH_vEfGiQsbHoCt4_w" source="_Zah8sH_yEfGiQsbHoCt4_w">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_BI2FAX_zEfGiQsbHoCt4_w"/>
-        <condition xmi:type="expression:Expression" xmi:id="_BI2sEH_zEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+        <condition xmi:type="expression:Expression" xmi:id="_BI2sEH_zEfGiQsbHoCt4_w" name="true" content="true" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
       <connections xmi:type="process:SequenceFlow" xmi:id="_EvT1YH_zEfGiQsbHoCt4_w" target="_ZPjmUH_zEfGiQsbHoCt4_w" source="_dFvKgH_vEfGiQsbHoCt4_w">
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_EvUccH_zEfGiQsbHoCt4_w"/>
@@ -414,7 +512,14 @@
         <decisionTable xmi:type="decision:DecisionTable" xmi:id="_PTj3QX_zEfGiQsbHoCt4_w"/>
         <condition xmi:type="expression:Expression" xmi:id="_PTj3Qn_zEfGiQsbHoCt4_w" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
-      <actors xmi:type="process:Actor" xmi:id="_kNhmS3_nEfGnAoMFd5TsSQ" documentation="This is an example of actor that is mapped to any ACME users" name="Employee actor" initiator="true"/>
+      <connections xmi:type="process:SequenceFlow" xmi:id="_2h-8kIAJEfGnScNqXgq4cw" target="_kNhmN3_nEfGnAoMFd5TsSQ" source="_kNhmN3_nEfGnAoMFd5TsSQ">
+        <decisionTable xmi:type="decision:DecisionTable" xmi:id="_2iSekIAJEfGnScNqXgq4cw"/>
+        <condition xmi:type="expression:Expression" xmi:id="_2iTFoIAJEfGnScNqXgq4cw" name="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
+      </connections>
+      <actors xmi:type="process:Actor" xmi:id="_kNhmS3_nEfGnAoMFd5TsSQ" documentation="This is an example of actor that is mapped to any ACME users" name="Employee actor"/>
+      <actors xmi:type="process:Actor" xmi:id="_7rxAMIAREfGnScNqXgq4cw" documentation="Usuario que inicia la solicitud del pedido de KFC a través de la app, web, mostrador o agregadores." name="Cliente" initiator="true"/>
+      <actors xmi:type="process:Actor" xmi:id="__7H8kIAREfGnScNqXgq4cw" documentation="Colaborador de tienda encargado de registrar la orden en el sistema y gestionar la confirmación del pago." name="Cajero"/>
+      <actors xmi:type="process:Actor" xmi:id="_E72rgIASEfGnScNqXgq4cw" documentation="Colaborador responsable de armar el pedido, realizar el checklist de verificación y entregar al cliente o motorizado." name="Personal de Empaque"/>
       <contract xmi:type="process:Contract" xmi:id="_kNhmTH_nEfGnAoMFd5TsSQ"/>
       <searchIndexes xmi:type="process:SearchIndex" xmi:id="_kNhmTX_nEfGnAoMFd5TsSQ">
         <name xmi:type="expression:Expression" xmi:id="_kNhmTn_nEfGnAoMFd5TsSQ" content="" returnTypeFixed="true"/>
@@ -788,6 +893,15 @@
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PTkeUn_zEfGiQsbHoCt4_w" points="[-7, 1, -84, 16]$[62, -15, -15, 0]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PTmTgH_zEfGiQsbHoCt4_w" id="(1.0,0.6046511627906976)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PTmTgX_zEfGiQsbHoCt4_w" id="(0.10714285714285714,0.5428571428571428)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_2jXcoIAJEfGnScNqXgq4cw" type="4001" element="_2h-8kIAJEfGnScNqXgq4cw" source="_kNhmbH_nEfGnAoMFd5TsSQ" target="_kNhmbH_nEfGnAoMFd5TsSQ" roundedBendpointsRadius="10" routing="Rectilinear">
+      <children xmi:type="notation:DecorationNode" xmi:id="_2jYDsIAJEfGnScNqXgq4cw" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2jYDsYAJEfGnScNqXgq4cw" y="-10"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_2jXcoYAJEfGnScNqXgq4cw" fontName="Segoe UI"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2jXcooAJEfGnScNqXgq4cw" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2jbuEIAJEfGnScNqXgq4cw" id="(1.0,0.37777777777777777)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2jbuEYAJEfGnScNqXgq4cw" id="(1.0,0.37777777777777777)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
