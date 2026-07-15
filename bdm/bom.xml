@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<businessObjectModel xmlns="http://documentation.bonitasoft.com/bdm-xml-schema/1.0" modelVersion="1.0">
+    <businessObjects>
+        <businessObject qualifiedName="com.kfc.pedidos.Canal">
+            <fields>
+                <field type="STRING" length="50" name="nombre" nullable="false" collection="false"/>
+                <field type="STRING" length="30" name="tipo" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Cliente">
+            <fields>
+                <field type="STRING" length="150" name="nombre" nullable="false" collection="false"/>
+                <field type="STRING" length="20" name="telefono" nullable="true" collection="false"/>
+                <field type="STRING" length="150" name="email" nullable="true" collection="false"/>
+                <field type="STRING" length="250" name="direccionPrincipal" nullable="true" collection="false"/>
+                <field type="LOCALDATE" length="255" name="fechaRegistro" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.DetallePedido">
+            <fields>
+                <field type="INTEGER" length="255" name="cantidad" nullable="false" collection="false"/>
+                <field type="DOUBLE" length="255" name="precioUnitario" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Pedido" fetchType="LAZY" name="pedido" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Producto" fetchType="LAZY" name="producto" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Empleado">
+            <fields>
+                <field type="STRING" length="150" name="nombre" nullable="false" collection="false"/>
+                <field type="STRING" length="50" name="rol" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Tienda" fetchType="LAZY" name="tienda" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.EncuestaSatisfaccion">
+            <fields>
+                <field type="INTEGER" length="255" name="calificacion" nullable="false" collection="false"/>
+                <field type="STRING" length="300" name="comentario" nullable="true" collection="false"/>
+                <field type="LOCALDATE" length="255" name="fechaRespuesta" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Pedido" fetchType="LAZY" name="pedido" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Entrega">
+            <fields>
+                <field type="STRING" length="20" name="modalidad" nullable="false" collection="false"/>
+                <field type="LOCALDATE" length="255" name="horaDespacho" nullable="true" collection="false"/>
+                <field type="LOCALDATE" length="255" name="horaEntrega" nullable="true" collection="false"/>
+                <field type="STRING" length="100" name="ubicacionGps" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Pedido" fetchType="LAZY" name="pedido" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Motorizado" fetchType="LAZY" name="motorizado" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.KpiBI">
+            <fields>
+                <field type="STRING" length="80" name="indicador" nullable="false" collection="false"/>
+                <field type="DOUBLE" length="255" name="valor" nullable="false" collection="false"/>
+                <field type="LOCALDATE" length="255" name="fechaRegistro" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Entrega" fetchType="LAZY" name="entrega" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Motorizado">
+            <fields>
+                <field type="STRING" length="150" name="nombre" nullable="false" collection="false"/>
+                <field type="STRING" length="30" name="tipo" nullable="false" collection="false"/>
+                <field type="STRING" length="50" name="placaOApp" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.OrdenKDS">
+            <fields>
+                <field type="LOCALDATE" length="255" name="horaRecepcion" nullable="false" collection="false"/>
+                <field type="LOCALDATE" length="255" name="horaInicioPrep" nullable="true" collection="false"/>
+                <field type="LOCALDATE" length="255" name="horaFinPrep" nullable="true" collection="false"/>
+                <field type="INTEGER" length="255" name="tiempoCicloSeg" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Pedido" fetchType="LAZY" name="pedido" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Pago">
+            <fields>
+                <field type="STRING" length="30" name="metodo" nullable="false" collection="false"/>
+                <field type="STRING" length="20" name="estadoPago" nullable="false" collection="false"/>
+                <field type="LOCALDATE" length="255" name="fechaPago" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Pedido" fetchType="LAZY" name="pedido" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Pedido">
+            <fields>
+                <field type="LOCALDATE" length="255" name="fechaHora" nullable="false" collection="false"/>
+                <field type="STRING" length="30" name="estado" nullable="false" collection="false"/>
+                <field type="DOUBLE" length="255" name="montoTotal" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Cliente" fetchType="LAZY" name="cliente" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Canal" fetchType="LAZY" name="canal" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Tienda" fetchType="LAZY" name="tienda" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Producto">
+            <fields>
+                <field type="STRING" length="150" name="nombre" nullable="false" collection="false"/>
+                <field type="DOUBLE" length="255" name="precio" nullable="false" collection="false"/>
+                <field type="STRING" length="50" name="categoria" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.Tienda">
+            <fields>
+                <field type="STRING" length="150" name="nombre" nullable="false" collection="false"/>
+                <field type="STRING" length="100" name="distrito" nullable="true" collection="false"/>
+                <field type="STRING" length="250" name="direccion" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+        <businessObject qualifiedName="com.kfc.pedidos.VerificacionChecklist">
+            <fields>
+                <field type="BOOLEAN" length="255" name="completoCorrecto" nullable="false" collection="false"/>
+                <field type="STRING" length="250" name="observaciones" nullable="true" collection="false"/>
+                <field type="LOCALDATE" length="255" name="fechaVerificacion" nullable="true" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.OrdenKDS" fetchType="LAZY" name="ordenKDS" nullable="false" collection="false"/>
+                <relationField type="AGGREGATION" reference="com.kfc.pedidos.Empleado" fetchType="LAZY" name="empleado" nullable="false" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries/>
+            <indexes/>
+        </businessObject>
+    </businessObjects>
+</businessObjectModel>
